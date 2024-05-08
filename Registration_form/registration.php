@@ -33,28 +33,28 @@
                     <input type="date" class="form-control border-black " name="dob" id="dob">
                 </div>
                 <div class=" form-group mb-3">
-                    <label for="genders" class=" form-label fs-5">Specify Gender</label>
+                    <label for="gender" class=" form-label fs-5">Specify Gender</label>
                     <div class="form-check">
-                        <input class="form-check-input border-black" type="radio" name="gender" id="Male">
+                        <input class="form-check-input border-black" type="radio" name="gender" id="Male" value="Male" >
                         <label class="form-check-label" for="Male">Male</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input border-black" type="radio" name="gender" id="Female">
+                        <input class="form-check-input border-black" type="radio" name="gender" id="Female" value="Female" >
                         <label class="form-check-label" for="Female">Female</label>
                     </div>
                 </div>
                 <div class=" form-group mb-3">
-                    <label for="dob" class=" form-label fs-5">Specify Language</label>
+                    <label for="lang" class=" form-label fs-5">Specify Language</label>
                     <div class="form-check">
-                        <input class="form-check-input border-black" type="checkbox" name="lang" id="C">
+                        <input class="form-check-input border-black" type="checkbox" name="lang[0]" id="C" value="C" >
                         <label class="form-check-label" for="C">C</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input border-black" type="checkbox" name="lang" id="C++">
+                        <input class="form-check-input border-black" type="checkbox" name="lang[1]" id="C++" value="C++">
                         <label class="form-check-label" for="C++">C++</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input border-black" type="checkbox" name="lang" id="PHP">
+                        <input class="form-check-input border-black" type="checkbox" name="lang[2]" id="PHP" value="PHP">
                         <label class="form-check-label" for="PHP">PHP</label>
                     </div>
                 </div>
@@ -83,11 +83,16 @@
             $pwd=$_POST['pwd'];
             $dob=$_POST['dob'];
             $gender=$_POST['gender'];
-            $lang=$_POST['lang'];
+            $lang_arr=$_POST['lang'];
             $city=$_POST['city'];
             $address=$_POST['address'];
-            $sql="INSERT INTO user (name, email, pwd, dob, gender, lang, city, address) VALUES ('$name', '$email_id', '$pwd', '$dob', '$gender', '$lang', '$city', '$address')";
 
+            $lang="";
+            foreach ($lang_arr as $l){
+                $lang=$lang." ".$l;
+            }
+
+            $sql="INSERT INTO user (name, email, pwd, dob, gender, lang, city, address) VALUES ('$name', '$email_id', '$pwd', '$dob', '$gender', '$lang', '$city', '$address')";
             $res=mysqli_query($con, $sql) or die(mysqli_errno($con));
             if($res==1){
                 echo "Registration is Successful";
