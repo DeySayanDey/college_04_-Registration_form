@@ -83,14 +83,15 @@
             $pwd=$_POST['pwd'];
             $dob=$_POST['dob'];
             $gender=$_POST['gender'];
-            $lang_arr=$_POST['lang'];
+            // $lang_arr=$_POST['lang'];
+            $lang=implode(", ",$_POST['lang']);
             $city=$_POST['city'];
             $address=$_POST['address'];
 
-            $lang="";
-            foreach ($lang_arr as $l){
-                $lang=$lang." ".$l;
-            }
+            // $lang="";
+            // foreach ($lang_arr as $l){
+            //     $lang=$lang." ".$l;
+            // }
 
             $sql="INSERT INTO user (name, email, pwd, dob, gender, lang, city, address) VALUES ('$name', '$email_id', '$pwd', '$dob', '$gender', '$lang', '$city', '$address')";
             $res=mysqli_query($con, $sql) or die(mysqli_errno($con));
